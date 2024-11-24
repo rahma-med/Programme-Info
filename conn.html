@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de Connexion et Inscription</title>
+    <link rel="stylesheet" href="conn.css">
+</head>
+<body>
+
+    <div class="form-container">
+        <!-- Formulaire de Connexion -->
+        <div class="form" id="login-form">
+            <h2>Connexion</h2>
+            <form action="#" method="post">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Entrez votre email" required>
+
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+
+                <button type="submit" class="btn">Se connecter</button>
+                <p>Pas encore de compte ? <a href="#" id="show-register">S'inscrire</a></p>
+            </form>
+        </div>
+
+        <!-- Formulaire d'Inscription -->
+        <div class="form" id="register-form">
+            <h2>Inscription</h2>
+            <form action="#" method="post">
+                <label for="num">Numéro d'étudiant</label>
+                <input type="text" id="num" name="num" placeholder="Numéro d'étudiant" required>
+
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required>
+
+                <label for="email-register">Email</label>
+                <input type="email" id="email-register" name="email" placeholder="Votre email" required>
+
+                <label for="password-register">Mot de passe</label>
+                <input type="password" id="password-register" name="password" placeholder="Votre mot de passe" required>
+
+                <button type="submit" class="btn">S'inscrire</button>
+                <p>Déjà un compte ? <a href="#" id="show-login">Se connecter</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const showRegisterLink = document.getElementById('show-register');
+        const showLoginLink = document.getElementById('show-login');
+
+        // Afficher le formulaire d'inscription
+        showRegisterLink.addEventListener('click', () => {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        });
+
+        // Afficher le formulaire de connexion
+        showLoginLink.addEventListener('click', () => {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+    </script>
+
+</body>
+</html>
