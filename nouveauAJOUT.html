@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Programme</title>
+</head>
+<body>
+
+<h2>Programme Information Form</h2>
+
+<form action="nouveauAJOUT.php" method="POST" enctype="multipart/form-data">
+    <label for="niveau">Niveau:</label><br>
+    <input type="number" id="niveau" name="niveau" required><br><br>
+
+    <label for="semestre">Semestre:</label><br>
+    <input type="number" id="semestre" name="semestre" required><br><br>
+
+    <label for="matiere">Matiere:</label><br>
+    <input type="text" id="matiere" name="matiere" required><br><br>
+
+    <label for="cours_pdf">Cours PDF:</label><br>
+    <input type="file" id="cours_pdf" name="cours_pdf"><br><br>
+
+    <label for="td_pdf">TD PDF:</label><br>
+    <input type="file" id="td_pdf" name="td_pdf"><br><br>
+
+    <label for="tp_pdf">TP PDF:</label><br>
+    <input type="file" id="tp_pdf" name="tp_pdf"><br><br>
+
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
