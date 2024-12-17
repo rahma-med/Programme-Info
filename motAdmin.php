@@ -21,7 +21,8 @@ if ($conn->connect_error) {
 // Insertion dans la table administrateur
 $sql = "INSERT INTO administrateur (nom, prenom, email, mot_de_passe, date_creation, statut) 
         VALUES ('Abdi', 'Nasteho', 'nastehoabdi@gmail.com', '$mot_de_passe_hache', NOW(), 'actif')";
-
+ 
+ 
 if ($conn->query($sql) === TRUE) {
     echo "Nouveau record administrateur créé avec succès";
 } else {

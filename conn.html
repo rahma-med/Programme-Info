@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil</title>
+    <title>Connexion</title>
     <style>
         /* Global Styles */
         body {
             font-family: 'Arial', sans-serif;
             background-image: url('carousel1.jpg'); /* Remplacez cette URL par celle de votre image */
-
             background-size: cover;
             background-position: center;
             color: #fff; /* Texte blanc pour contraster avec l'arrière-plan */
@@ -17,8 +16,8 @@
             padding: 0;
             height: 100vh; /* Assure que le fond couvre toute la page */
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
+            align-items: center;
         }
 
         nav {
@@ -44,62 +43,58 @@
             text-decoration: underline;
         }
 
-        /* Content Section */
-        .container {
-            margin-top: 80px; /* Pour que le contenu ne soit pas caché sous la navbar */
+        /* Login Form Section */
+        .login-container {
             padding: 40px;
-            background-color: rgba(196, 183, 183, 0.6); /* Fond semi-transparent pour le contenu */
+            background-color: rgba(196, 183, 183, 0.8); /* Fond semi-transparent pour le contenu */
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(39, 42, 54, 0.3);
-            width: 80%;
-            margin-left: auto;
-            margin-right: auto;
-            flex-grow: 1; /* Permet au contenu d'occuper tout l'espace disponible */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
         }
 
         h1 {
             font-size: 36px;
             color: #fff;
             margin-bottom: 20px;
-            text-align: center;
         }
 
-        p {
+        label {
             font-size: 18px;
-            color: #140f0f;
-            line-height: 1.6;
-            text-align: justify;
+            color: #1e1818;
+            display: block;
+            margin-bottom: 10px;
         }
 
-        /* Get Started Button */
-        .get-started-btn {
+        input {
+            font-size: 16px;
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
             background-color: #ff9800;
             color: white;
-            padding: 15px 30px;
-            font-size: 18px;
             border: none;
-            border-radius: 5px;
-            text-align: center;
             cursor: pointer;
-            margin-top: 20px;
-            display: block;
-            width: 100%;
         }
 
-        .get-started-btn:hover {
+        input[type="submit"]:hover {
             background-color: #e68900;
         }
 
-        /* Footer */
         footer {
             background-color: #0d0551;
             color: white;
             text-align: center;
-            padding: 30px;
-            margin-top: 40px;
+            padding: 15px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
         }
 
         footer a {
@@ -109,8 +104,8 @@
 
         /* Responsiveness */
         @media (max-width: 768px) {
-            .container {
-                width: 90%;
+            .login-container {
+                width: 100%;
             }
 
             nav a {
@@ -129,20 +124,24 @@
         <a href="about.html">À propos</a>
     </nav>
 
-    <!-- Content Section -->
-    <div class="container">
-        <h1> l'Université de l'Djibouti</h1>
-        <p>Nous sommes une institution académique qui offre des programmes d'études de haute qualité en informatique. Notre objectif est de former les futurs leaders technologiques qui transformeront le monde. Grâce à une approche pédagogique moderne et pratique, nous préparons nos étudiants à réussir dans un environnement numérique en constante évolution. Nous croyons fermement en l'importance de l'innovation, de la recherche et de l'adaptabilité pour faire face aux défis du futur technologique.</p>
-        
-        <!-- Get Started Button -->
-        <a href="conn.html">
-            <button class="get-started-btn">Get Started</button>
-        </a>
+    <!-- Login Form Section -->
+    <div class="login-container">
+        <h1>Connexion</h1>
+        <form action="connexion.php" method="POST">
+            <label for="username">  Email d'utilisateur</label>
+            <input type="email" id="username" name="username" required>
+
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" required>
+
+            <input type="submit" value="Se connecter">
+            <p>Si vous avez pas un copmpte ? <a href="insc.html" > S inscrire-vous</a></p>
+        </form>
     </div>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 - Université de l'Djibouti. <a href="legal.html">Mentions légales</a></p>
+       <center><p>&copy; 2024 - Université de l'Informatique. <a href="#">Mentions légales</a></p>
     </footer>
 
 </body>
