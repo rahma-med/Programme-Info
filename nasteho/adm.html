@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        /* Styles généraux */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fc;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            padding: 15px 25px;
+            border-bottom: 1px solid #34495e;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #34495e;
+        }
+
+        /* Main content */
+        .main-content {
+            margin-left: 270px;
+            padding: 30px;
+            background-color: white;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .stat {
+            background-color: #ecf0f1;
+            padding: 20px;
+            width: 45%;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .stat p {
+            font-size: 36px;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #34495e;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .main-content {
+                margin-left: 210px;
+            }
+
+            .stats {
+                flex-direction: column;
+            }
+
+            .stat {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <ul>
+            <li><a href="#">Admin</a></li>
+            <li><a href="#">Courses</a></li>
+            <li><a href="#">Students</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <h1>Admin Dashboard</h1>
+
+        <div class="stats">
+            <div class="stat">
+                <h2>Courses</h2>
+                <p>8</p>
+            </div>
+            <div class="stat">
+                <h2>Students</h2>
+                <p>9</p>
+            </div>
+        </div>
+
+        <h2>Course Orders</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Course ID</th>
+                    <th>Student Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ORDS98956453</td>
+                    <td>10</td>
+                    <td>ant@example.com</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Enrolled Students and Programs</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Email</th>
+                    <th>Program</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Jean Dupont</td>
+                    <td>jean.dupont@example.com</td>
+                    <td>Data Science</td>
+                </tr>
+                <tr>
+                    <td>Marie Curie</td>
+                    <td>marie.curie@example.com</td>
+                    <td>Web Development</td>
+                </tr>
+                <tr>
+                    <td>Paul Martin</td>
+                    <td>paul.martin@example.com</td>
+                    <td>Machine Learning</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Ce script gère des interactions simples sur le tableau des étudiants
+        document.addEventListener('DOMContentLoaded', () => {
+            const studentsTable = document.querySelector('table');
+
+            // Ajoute un événement de clic sur chaque ligne du tableau des étudiants
+            studentsTable.addEventListener('click', (event) => {
+                const clickedRow = event.target.closest('tr');
+                if (clickedRow && clickedRow !== studentsTable.querySelector('thead tr')) {
+                    const studentName = clickedRow.cells[0].textContent;
+                    const studentEmail = clickedRow.cells[1].textContent;
+                    const studentProgram = clickedRow.cells[2].textContent;
+                    alert(`Étudiant: ${studentName}\nEmail: ${studentEmail}\nProgramme: ${studentProgram}`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

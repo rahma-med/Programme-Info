@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration - Programme Informatique</title>
+    <style>
+        /* (les styles précédents restent inchangés) */
+    </style>
+    <script>
+        function toggleTpField() {
+            var tpField = document.getElementById('tp');
+            var tpCheckbox = document.getElementById('has_tp');
+            // Si la case TP est cochée, on affiche le champ TP, sinon on le cache
+            tpField.style.display = tpCheckbox.checked ? 'block' : 'none';
+        }
+    </script>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="admin-logo">
+            <img src="ima.jpg" alt="Admin Avatar">
+        </div>
+        <ul>
+            <li><a href="#">Admin</a></li>
+            <li><a href="adAFFprog.php">Courses</a></li>
+            <li><a href="etAFF.php">Students</a></li>
+            <li><a href="#">Settings</a></li>
+        </ul>
+    </div>
+
+    <center><h2>Ajouter une Matière</h2></center>
+    <form action="ajouter_programme.php" method="POST" enctype="multipart/form-data">
+        <label for="niveau">Niveau:</label>
+        <select id="niveau" name="niveau">
+            <option value="1"> ---</option>
+            <option value="1">Lience 1</option>
+            <option value="2">Lience 2</option>
+            <option value="3">Lience 3</option>
+        </select><br>
+
+        <label for="semestre">Semestre:</label>
+        <select id="semestre" name="semestre">
+            <option value="1">----</option>
+            <option value="1">Semestre 1</option>
+            <option value="2">Semestre 2</option>
+        </select><br>
+
+        <label for="matiere">Matière:</label>
+        <input type="text" id="matiere" name="matiere" required><br>
+
+        <label for="cours">Cours (PDF):</label>
+        <input type="file" id="cours" name="cours_pdf" accept=".pdf" ><br>
+
+        <label for="td">Travaux Dirigés (TD) (PDF):</label>
+        <input type="file" id="td" name="td_pdf" accept=".pdf" ><br>
+
+        <!-- Nouveau champ pour indiquer si la matière a des TP -->
+        <label for="has_tp">Cette matière a-t-elle des Travaux Pratiques (TP) ?</label>
+        <input type="checkbox" id="has_tp" name="has_tp" onchange="toggleTpField()"><br>
+
+        <!-- Champ TP qui sera affiché ou caché en fonction de la sélection -->
+        <label for="tp" style="display:none;" id="tpLabel">Travaux Pratiques (TP) (PDF):</label>
+        <input type="file" id="tp" name="tp_pdf" accept=".pdf" style="display:none;"><br>
+
+        <button type="submit">Ajouter la Matière</button>
+    </form>
+
+</body>
+</html>
