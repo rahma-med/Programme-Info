@@ -1,4 +1,11 @@
 <?php
+session_start();
+// Vérifier si l'utilisateur est bien connecté (si la session est active)
+if (!isset($_SESSION['user_id']) && !isset($_SESSION['admin_id'])) {
+    // Si l'utilisateur n'est pas connecté, rediriger vers la page de connexion
+    header("Location: conn.html");
+    exit();
+}
 // Connexion à la base de données
 $conn = new mysqli("localhost", "root", "", "programme_informatique");
 

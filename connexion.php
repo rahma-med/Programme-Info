@@ -1,4 +1,5 @@
 <?php
+
 // Connexion à la base de données
 $servername = "localhost";
 $username = "nasteho";
@@ -21,6 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['username']) && isset($_POST['password']) && !empty($_POST['username']) && !empty($_POST['password'])) {
         $email = mysqli_real_escape_string($conn, $_POST['username']); // Utilisation de 'username' ici
         $password = $_POST['password'];
+        $_SESSION['password'] = $password;
 
         // Débogage : Afficher l'email
         echo "Email reçu : " . $email . "<br>";
@@ -74,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION['admin_nom'] = $row['nom'];
 
                     // Redirection vers la page d'administration
-                    header("Location: testAFF.html");
+                    header("Location: testAFF.php");
                     exit();
                 } else {
                     echo "Mot de passe incorrect pour l'administrateur!";
