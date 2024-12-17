@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    
+    <link rel="stylesheet" href="">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choix des Matières par Niveau</title>
+    <style>
+        
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            height: 300vh;
+        }
+        
+
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            height: 100%;
+            box-shadow: 0 2px 10px rgba(225, 210, 210, 0.904);
+            background-color: #fff;
+            border-radius: 8px;
+        }
+
+        .sidebar {
+            width: 30%;
+            padding: 20px;
+            background-color: #d7d3d3;
+            color: #fff;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        .content {
+            width: 70%;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        h2 {
+            color: #fff;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            background-color: #444;
+            color: #fff;
+            border: 1px solid #101711;
+            border-radius: 6px;
+        }
+
+        .semestre {
+            margin-top: 20px;
+        }
+
+        .semestre h3 {
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #444;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        #matieres div {
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #555;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #matieres div:hover {
+            background-color: #777;
+        }
+
+        #contenu {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .matiere-info {
+            margin-top: 20px;
+        }
+
+        .matiere-info p {
+            margin-bottom: 15px;
+        }
+
+        .radio-buttons {
+            margin-top: 10px;
+        }
+
+        .radio-buttons label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .radio-buttons input {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2><span colore="green"> Choisissez un niveau</span></h2>
+            <select id="niveau" onchange="afficherMatières()">
+                <option value="">-- Sélectionnez un niveau --</option>
+                <option value="L1">L1</option>
+                <option value="L2">L2</option>
+                <option value="L3">L3</option>
+            </select>
+
+            <div id="matieres"></div>
+        </div>
+
+        <div class="content">
+            <div id="contenu"></div>
+        </div>
+    </div>
+
+    <script>
+        const matieresData = {
+            L1: {
+                semestre1: {
+                    "Introduction Algorithme 1": {
+                        contenu: "Introduction aux algorithmes pour le premier semestre.",
+                        pdfCours: "cours algorithme 2022-2023.pdf",
+                        pdfTD: "Algorithmique.pdf",
+                        pdfTP: "Tpalgo.pdf"
+
+                    },
+                    "Analyse pour informatique 1": {
+                        contenu: "Analyse des concepts mathématiques pour l'informatique.",
+                        pdfCours: "Cours_analyse.pdf",
+                        pdfTD: "tdanalyse.pdf"
+                        
+                    },
+                    "Représentation des données en machine": {
+                        contenu: "Analyse des concepts mathématiques pour l'informatique.",
+                        pdfCours: "cour de representation.pdf",
+                        pdfTD: "tdrepresentation.pdf",
+                        pdfTP: "tprepresentation.pdf"
+                    },
+                    "Outils informatique": {
+                        contenu: "Analyse des concepts mathématiques pour l'informatique.",
+                        pdfCours: "cour outil informatique.pdf",
+                        pdfTP: "Tp_outils_informatique.pdf"
+                    },
+                    "Logique et arithmetique": {
+                        contenu: "Analyse des concepts mathématiques pour l'informatique.",
+                        pdfCours: "cours de Logiques Arithmetique.pdf",
+                        pdfTD: "tdlogique&arithmetique.pdf"
+                        
+                    },
+                    "Anglais I": {
+                        contenu: "Analyse des concepts mathématiques pour l'informatique.",
+                        pdfCours: "cours.pdf",
+                        pdfTD: "td.pdf"
+                        
+                    },
+
+                },
+
+                semestre2: {
+                    "Analyse pour informatique II ": {
+                        contenu: "Introduction à la mécanique appliquée à l'informatique.",
+                        pdfCours: "cour_analyse2.pdf",
+                        pdfTD: "tdanalyse2.pdf"
+                        
+                    },
+                    "Algebre lineaire": {
+                        contenu: "Introduction à la mécanique appliquée à l'informatique.",
+                        pdfCours: "cours_algebre.pdf",
+                        pdfTD: "tdalgebre.pdf"
+                       
+                    },
+                    
+                    "Programmation procedurale": {
+                        contenu: "Introduction à la mécanique appliquée à l'informatique.",
+                        pdfCours: "cours_programmation_procedurale.pdf",
+                        pdfTD: "tdprogrammation.pdf",
+                        pdfTP: "tpprogrammation.pdf"
+                    },
+                    "Introduction aux Systeme d exploitation": {
+                        contenu: "Introduction à la mécanique appliquée à l'informatique.",
+                        pdfCours: "courSE.pdf",
+                        pdfTD: "tdSE.pdf",
+                        pdfTP: "tpSE.pdf"
+                    },  
+                    "Introduction au Reseaux informatique": {
+                        contenu: "Introduction à la mécanique appliquée à l'informatique.",
+                        pdfCours: "cours_reseau.pdf",
+                        pdfTD: "tdreseau.pdf",
+                        pdfTP: "tpreseau.pdf"
+                    },  
+                    "Anglais II": {
+                        contenu: "Introduction à la mécanique appliquée à l'informatique.",
+                        pdfCours: "path/to/Mecanique_1_cours.pdf",
+                        pdfTD: "path/to/Mecanique_1_td.pdf"
+                        
+                    },
+                }
+            },
+            L2: {
+                semestre1: {
+                    "Probabilites & Statistique": {
+                        contenu: "Approfondissement des mathématiques pour les sciences informatiques.",
+                        pdfCours: "coursPS.pdf",
+                        pdfTD: "tdPS.pdf",
+                        pdfTP: "tpPS.pdf"
+                    },
+                    "Architcture des ordinateur II": {
+                        contenu: "Approfondissement des mathématiques pour les sciences informatiques.",
+                        pdfCours: "coursarchi.pdf",
+                        pdfTD: "tdarchi.pdf",
+                        pdfTP: "tparchi.pdf"
+                    },
+                    "Structures des donnes lineaires": {
+                        contenu: "Approfondissement des mathématiques pour les sciences informatiques.",
+                        pdfCours: "coursSDL.pdf",
+                        pdfTD: "tdSDL.pdf",
+                        pdfTP: "tpSDL.pdf"
+                    },
+                    "Reseau et Protocoles": {
+                        contenu: "Approfondissement des mathématiques pour les sciences informatiques.",
+                        pdfCours: "coursRP.pdf",
+                        pdfTD: "tdRP.pdf",
+                        pdfTP: "tpRP.pdf"
+                    },
+                    "Bases de données": {
+                        contenu: "Approfondissement des mathématiques pour les sciences informatiques.",
+                        pdfCours: "coursbd.pdf",
+                        pdfTD: "tdbd.pdf",
+                        pdfTP: "tpbd.pdf"
+                    },
+                    "Anglais III": {
+                        contenu: "Approfondissement des mathématiques pour les sciences informatiques.",
+                        pdfCours: "path/to/Maths2_cours.pdf",
+                        pdfTD: "path/to/Maths2_td.pdf",
+                        pdfTP: "path/to/Maths2_tp.pdf"
+                    },
+                    
+                },
+                semestre2: {
+                    "Administration des bases de donnee": {
+                        contenu: "Physique appliquée aux technologies informatiques.",
+                        pdfCours: "coursABD.pdf",
+                        pdfTD: "tdABD.pdf",
+                        pdfTP: "tpABD.pdf"
+                    },
+                    "Systèmes d exploitation": {
+                        contenu: "Physique appliquée aux technologies informatiques.",
+                        pdfCours: "coursSE2.pdf",
+                        pdfTD: "tdSE2.pdf",
+                        pdfTP: "tpSE2.pdf"
+                    },
+                    "Programmation orientée objet": {
+                        contenu: "Physique appliquée aux technologies informatiques.",
+                        pdfCours: "coursPOO.pdf",
+                        pdfTD: "tdPOO.pdf",
+                        pdfTP: "tpPOO.pdf"
+                    },
+                    "Structures des donnee arborescente": {
+                        contenu: "Physique appliquée aux technologies informatiques.",
+                        pdfCours: "coursSDA.pdf",
+                        pdfTD: "tdSDA.pdf",
+                        pdfTP: "tpSDA.pdf"
+                    },
+                    "Programmation web": {
+                        contenu: "Physique appliquée aux technologies informatiques.",
+                        pdfCours: "coursPW.pdf",
+                        pdfTD: "tdPW.pdf",
+                        pdfTP: "tpPW.pdf"
+                    },
+                    "Anglais IV": {
+                        contenu: "Physique appliquée aux technologies informatiques.",
+                        pdfCours: "path/to/Physique2_cours.pdf",
+                        pdfTD: "path/to/Physique2_td.pdf",
+                        pdfTP: "path/to/Physique2_tp.pdf"
+                    },
+                    
+                }
+            },
+            L3: {
+                semestre1: {
+                    "Base de données avancée": {
+                        contenu: "Mathématiques avancées pour l'informatique.",
+                        pdfCours: "coursbda.pdf",
+                        pdfTD: "tdbda.pdf",
+                        pdfTP: "tpbda.pdf"
+                    },
+                    "Algorithme de graphe": {
+                        contenu: "Mathématiques avancées pour l'informatique.",
+                        pdfCours: "coursgraphe.pdf",
+                        pdfTD: "tdgraphe.pdf",
+                        pdfTP: "tpgraphe.pdf"
+                    },
+                    "Achitecture des ordinateurs": {
+                        contenu: "Mathématiques avancées pour l'informatique.",
+                        pdfCours: "coursAO.pdf",
+                        pdfTD: "tdAO.pdf",
+                        pdfTP: "tpAO.pdf"
+                    },
+                    "Gestion projet": {
+                        contenu: "Mathématiques avancées pour l'informatique.",
+                        pdfCours: "coursGP.pdf",
+                        pdfTD: "tdGP.pdf",
+                        pdfTP: "tpGP.pdf"
+                    },
+                    "Conception et Programmation orientée objet": {
+                        contenu: "Mathématiques avancées pour l'informatique.",
+                        pdfCours: "coursCPOO.pdf",
+                        pdfTD: "tdCPOO.pdf",
+                        pdfTP: "tpCPOO.pdf"
+                    },
+                    "Anglais V": {
+                        contenu: "Mathématiques avancées pour l'informatique.",
+                       
+                        pdfTD: "td.pdf",
+                    
+                    },
+                },
+                semestre2: {
+                    "Fondemental et Theorie": {
+                        contenu: "Physique des systèmes complexes et leur impact sur l'informatique.",
+                        pdfCours: "coursFT.pdf",
+                        pdfTD: "tdFT.pdf",
+                        pdfTP: "tpFT.pdf"  
+                    },
+                    "Projet tutore": {
+                        contenu: "Physique des systèmes complexes et leur impact sur l'informatique.",
+                       
+                        pdfTP: "tpPT.pdf"  
+                    },
+                    "Administration de Systeme": {
+                        contenu: "Physique des systèmes complexes et leur impact sur l'informatique.",
+                        pdfCours: "coursAS.pdf",
+                        pdfTD: "tdAS.pdf",
+                        pdfTP: "tpAS.pdf"  
+                    },
+                    "genie Logiciel": {
+                        contenu: "Physique des systèmes complexes et leur impact sur l'informatique.",
+                        pdfCours: "coursGL.pdf",
+                        pdfTD: "tdGL.pdf",
+                        pdfTP: "tpGL.pdf"  
+                    },
+                    "Intelligence Arthificiel": {
+                        contenu: "Physique des systèmes complexes et leur impact sur l'informatique.",
+                        pdfCours: "coursIA.pdf",
+                        pdfTD: "tdIA.pdf",
+                        pdfTP: "tpIA.pdf"  
+                    },
+                    "Langage et Compilation": {
+                        contenu: "Physique des systèmes complexes et leur impact sur l'informatique.",
+                        pdfCours: "coursLC.pdf",
+                        pdfTD: "tdLC.pdf",
+                        
+                    },
+                    "Anglais VI": {
+                        contenu: "Physique des systèmes complexes et leur impact sur l'informatique.",
+                        pdfCours: "cours.pdf",
+                        pdfTD: "td.pdf",
+                        pdfTP: "tp.pdf"  
+                    },
+                    
+                    
+                },
+
+            }
+        };
+
+        function afficherMatières() {
+            const niveau = document.getElementById("niveau").value;
+            const matieresDiv = document.getElementById("matieres");
+            const contenuDiv = document.getElementById("contenu");
+
+            matieresDiv.innerHTML = "";
+            contenuDiv.innerHTML = "";
+
+
+            if (niveau) {
+                const matieres = matieresData[niveau];
+                for (let semestre in matieres) {
+                    const semestreDiv = document.createElement("div");
+                    semestreDiv.classList.add("semestre");
+                    const semestreTitle = document.createElement("h3");
+                    semestreTitle.textContent = `Semestre ${semestre === 'semestre1' ? '1' : '2'}`;
+                    semestreDiv.appendChild(semestreTitle);
+
+                    for (let matiere in matieres[semestre]) {
+                        const div = document.createElement("div");
+                        div.innerHTML = `<strong>${matiere}</strong>`;
+                        div.addEventListener('click', () => {
+                            afficherOptionsFichiers(matiere, matieres[semestre][matiere]);
+                        });
+                        semestreDiv.appendChild(div);
+                    }
+
+                    matieresDiv.appendChild(semestreDiv);
+                }
+            }
+        }
+
+        function afficherOptionsFichiers(matiere, matiereData) {
+            // Supprimer tout contenu précédent
+            const contenuDiv = document.getElementById("contenu");
+            contenuDiv.innerHTML = `
+                <h3>${matiere}</h3>
+                <p>${matiereData.contenu}</p>
+                <div class="radio-buttons">
+                    <label>
+                        <input type="radio" name="fichier-${matiere}" onclick="ouvrirFichier('${matiereData.pdfCours}', 'cours')"> Cours
+                    </label>
+                    <label>
+                        <input type="radio" name="fichier-${matiere}" onclick="ouvrirFichier('${matiereData.pdfTD}', 'td')"> TD
+                    </label>
+                    <label>
+                        <input type="radio" name="fichier-${matiere}" onclick="ouvrirFichier('${matiereData.pdfTP}', 'tp')"> TP
+                    </label>
+                </div>
+            `;
+        }
+
+        function ouvrirFichier(url, typeFichier) {
+            // Effacer tout le contenu précédent
+            const contenuDiv = document.getElementById("contenu");
+            contenuDiv.innerHTML = `
+                <h3>Affichage du ${typeFichier.toUpperCase()}</h3>
+                <embed src="${url}" width="100%" height="600px" />
+            `;
+        }
+    </script>
+</body>
+</html>
