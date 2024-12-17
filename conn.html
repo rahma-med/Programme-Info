@@ -1,72 +1,151 @@
 <!DOCTYPE html>
 <html lang="fr">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page de Connexion et Inscription</title>
-    <link rel="stylesheet" href="conn.css">
+    <title>Connexion</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('carousel1.jpg'); /* Remplacez cette URL par celle de votre image */
+            background-size: cover;
+            background-position: center;
+            color: #fff; /* Texte blanc pour contraster avec l'arrière-plan */
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Assure que le fond couvre toute la page */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav {
+            background-color: #0d0551;
+            color: white;
+            padding: 40px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Login Form Section */
+        .login-container {
+            padding: 40px;
+            background-color: rgba(196, 183, 183, 0.8); /* Fond semi-transparent pour le contenu */
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(39, 42, 54, 0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 18px;
+            color: #1e1818;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            font-size: 16px;
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #e68900;
+        }
+
+        footer {
+            background-color: #0d0551;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer a {
+            color: #ff9800;
+            text-decoration: none;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .login-container {
+                width: 100%;
+            }
+
+            nav a {
+                font-size: 16px;
+                margin: 0 15px;
+            }
+        }
+
+    </style>
 </head>
 <body>
 
-    <div class="form-container">
-        <!-- Formulaire de Connexion -->
-        <div class="form" id="login-form">
-            <h2>Connexion</h2>
-            <form action="#" method="post">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Entrez votre email" required>
+    <!-- Navbar -->
+    <nav>
+        <a href="index.html">Accueil</a>
+        <a href="about.html">À propos</a>
+        <a href="contact.html">Contact</a>
+    </nav>
 
-                <label for="password">Mot de passe</label>
-                <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+    <!-- Login Form Section -->
+     
+    <div class="login-container">
+        <h1>Connexion</h1>
+        <form action="connexion.php" method="POST">
+            <label for="username">  Email d'utilisateur</label>
+            <input type="email" id="username" name="username" required>
 
-                <button type="submit" class="btn">Se connecter</button>
-                <p>Pas encore de compte ? <a href="#" id="show-register">S'inscrire</a></p>
-            </form>
-        </div>
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" required>
 
-        <!-- Formulaire d'Inscription -->
-        <div class="form" id="register-form">
-            <h2>Inscription</h2>
-            <form action="#" method="post">
-                <label for="num">Numéro d'étudiant</label>
-                <input type="text" id="num" name="num" placeholder="Numéro d'étudiant" required>
-
-                <label for="nom">Nom</label>
-                <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
-
-                <label for="prenom">Prénom</label>
-                <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required>
-
-                <label for="email-register">Email</label>
-                <input type="email" id="email-register" name="email" placeholder="Votre email" required>
-
-                <label for="password-register">Mot de passe</label>
-                <input type="password" id="password-register" name="password" placeholder="Votre mot de passe" required>
-
-                <button type="submit" class="btn">S'inscrire</button>
-                <p>Déjà un compte ? <a href="#" id="show-login">Se connecter</a></p>
-            </form>
-        </div>
+            <input type="submit" value="Se connecter">
+            <p>Si vous avez pas un copmpte ? <a href="insc.html" > S inscrire-vous</a></p>
+        </form>
     </div>
 
-    <script>
-        const loginForm = document.getElementById('login-form');
-        const registerForm = document.getElementById('register-form');
-        const showRegisterLink = document.getElementById('show-register');
-        const showLoginLink = document.getElementById('show-login');
-
-        // Afficher le formulaire d'inscription
-        showRegisterLink.addEventListener('click', () => {
-            loginForm.style.display = 'none';
-            registerForm.style.display = 'block';
-        });
-
-        // Afficher le formulaire de connexion
-        showLoginLink.addEventListener('click', () => {
-            registerForm.style.display = 'none';
-            loginForm.style.display = 'block';
-        });
-    </script>
+    <!-- Footer -->
+    <footer>
+       <center><p>&copy; 2024 - Université de l'Informatique. <a href="#">Mentions légales</a></p>
+    </footer>
 
 </body>
 </html>
