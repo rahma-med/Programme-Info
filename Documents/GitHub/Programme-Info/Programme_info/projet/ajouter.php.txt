@@ -1,0 +1,105 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $niveau = $_POST['niveau'];
+    $semestre = $_POST['semestre'];
+    $matiere = $_POST['matiere'];
+
+    // Vérification et téléchargement des fichiers PDF
+    $cours_pdf = $_FILES['cours_pdf'];
+    $td_pdf = $_FILES['td_pdf'];
+    $tp_pdf = $_FILES['tp_pdf'];
+
+    // Chemin de stockage des fichiers PDF
+    $target_dir = "uploads/";
+
+    // Assurez-vous que le répertoire existe
+    if (!is_dir($target_dir)) {
+        mkdir($target_dir, 0777, true);
+    }
+
+    // Variables pour les chemins des fichiers
+    $cours_pdf_path = NULL;
+    $td_pdf_path = NULL;
+    $tp_pdf_path = NULL;
+
+    // Fonction pour vérifier le type de fichier PDF
+    function is_valid_pdf($file) {
+        return mime_content_type($file['tmp_name']) === 'application/pdf';
+    }
+
+    // Fonction pour gérer les erreurs de téléchargement
+    function handle_file_error($file) {
+        switch ($file['error']) {
+            case UPLOAD_ERR_OK:
+                return true;
+            case UPLOAD_ERR_INI_SIZE:
+            case UPLOAD_ERR_FORM_SIZE:
+                echo "Le fichier est trop gros.";
+                return false;
+            case UPLOAD_ERR_PARTIAL:
+                echo "Le téléchargement a été interrompu.";
+                return false;
+            case UPLOAD_ERR_NO_FILE:
+                return true; // Si aucun fichier n'est téléchargé, c'est OK
+            default:
+                echo "Une erreur inconnue s'est produite.";
+                return false;
+        }
+    }
+
+    // Déplacer les fichiers téléchargés si présents et valides
+    if (handle_file_error($cours_pdf) && $cours_pdf['error'] == UPLOAD_ERR_OK) {
+        if (!is_valid_pdf($cours_pdf)) {
+            echo "Le fichier de cours doit être un PDF.";
+        } else {
+            $cours_pdf_path = $target_dir . basename($cours_pdf["name"]);
+            if (!move_uploaded_file($cours_pdf["tmp_name"], $cours_pdf_path)) {
+                echo "Erreur lors du téléchargement du fichier de cours.";
+            }
+        }
+    }
+
+    if (handle_file_error($td_pdf) && $td_pdf['error'] == UPLOAD_ERR_OK) {
+        if (!is_valid_pdf($td_pdf)) {
+            echo "Le fichier TD doit être un PDF.";
+        } else {
+            $td_pdf_path = $target_dir . basename($td_pdf["name"]);
+            if (!move_uploaded_file($td_pdf["tmp_name"], $td_pdf_path)) {
+                echo "Erreur lors du téléchargement du fichier TD.";
+            }
+        }
+    }
+
+    if (handle_file_error($tp_pdf) && $tp_pdf['error'] == UPLOAD_ERR_OK) {
+        if (!is_valid_pdf($tp_pdf)) {
+            echo "Le fichier TP doit être un PDF.";
+        } else {
+            $tp_pdf_path = $target_dir . basename($tp_pdf["name"]);
+            if (!move_uploaded_file($tp_pdf["tmp_name"], $tp_pdf_path)) {
+                echo "Erreur lors du téléchargement du fichier TP.";
+            }
+        }
+    }
+
+    // Connexion à la base de données
+    $conn = new mysqli("localhost", "root", "", "programme_informatique");
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Utilisation de requêtes préparées pour éviter les injections SQL
+    $stmt = $conn->prepare("INSERT INTO programme (niveau, semestre, matiere, cours_pdf, td_pdf, tp_pdf) 
+                            VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $niveau, $semestre, $matiere, $cours_pdf_path, $td_pdf_path, $tp_pdf_path);
+
+    if ($stmt->execute()) {
+        echo "Matière ajoutée avec succès!";
+    } else {
+        echo "Erreur SQL: " . $stmt->error;
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+?>
